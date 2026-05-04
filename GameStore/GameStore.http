@@ -1,0 +1,70 @@
+### Variáveis
+@baseUrl = http://localhost:5277
+@userId = 12345678-1234-1234-1234-123456789012
+@adminToken = 
+@userToken =
+
+### 1. LOGIN - Obter token Admin 
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "usuario": "admin",
+  "senha": "admin"
+}
+
+### 2. LOGIN - Obter token User
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "usuario": "user",
+  "senha": "User@123"
+}
+
+### 3. Acessar endpoint admin
+GET {{baseUrl}}/api/secure/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwianRpIjoiOGM2OGVjNjYtZThkOS00YjM5LWE3NjctOGZlZDdkMzIxY2U3IiwiZXhwIjoxNzc3ODQ3MDA4LCJpc3MiOiJHYW1lU3RvcmUiLCJhdWQiOiJHYW1lU3RvcmVBUEkifQ.PNzIQNpcImCSoz26cP-g29dMq94DQgx3MmZCznydQ0E
+
+
+### 4. Acessar endpoint user
+GET {{baseUrl}}/api/secure/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImp0aSI6ImQ0OTkxMmRhLWMwZTUtNDg3OS1iMzdiLTIwYzBkZTQ4ZDQxMCIsImV4cCI6MTc3Nzg0NzA3OCwiaXNzIjoiR2FtZVN0b3JlIiwiYXVkIjoiR2FtZVN0b3JlQVBJIn0.rvS4-vdoS698j_aOvoW3M9Hm7Lc6umQS4FivBLKPrKo
+
+
+### 5. Cadastrar novo usuário
+POST {{baseUrl}}/api/users
+Authorization: Bearer
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao@email.com",
+  "senha": "Senha@123"
+}
+
+### 6. Listar todos os usuários
+GET {{baseUrl}}/api/users
+Authorization: Bearer
+Content-Type: application/json
+
+### 7. Consultar usuário por ID
+GET {{baseUrl}}/api/users/{{userId}}
+Authorization: Bearer
+Content-Type: application/json
+
+### 8. Atualizar usuário
+PUT {{baseUrl}}/api/users/{{userId}}
+Authorization: Bearer
+Content-Type: application/json
+
+{
+  "nome": "João da Silva",
+  "email": "joao.novo@email.com",
+  "senha": "NovaSenha@123"
+}
+
+### 9. Deletar usuário
+DELETE {{baseUrl}}/api/users/{{userId}}
+Authorization: Bearer
+Content-Type: application/json

@@ -129,11 +129,7 @@ curl -X GET http://localhost:5277/api/users \
 ```
 
 ### 3. Ou use o Swagger UI
-Acesse `http://localhost:5277/swagger/index.html`, clique em **Authorize** e insira o token no formato:
-```
-Bearer {seu_token_aqui}
-```
-> ⚠️ O prefixo `Bearer ` é obrigatório ao inserir o token no Swagger.
+Acesse `http://localhost:5277/swagger/index.html` e clique em "Authorize" para inserir o token.
 
 ## 💾 Credenciais de Teste
 
@@ -142,44 +138,14 @@ Bearer {seu_token_aqui}
 | Admin | admin | admin | ✅ Completo |
 | User | user | User@123 | ❌ Limitado |
 
-## 🗄️ Banco de Dados
-
-**Servidor:** SQL Server local  
-**Nome:** fiapStore  
-
-> ⚠️ Configure a connection string no `appsettings.json` com as credenciais do seu ambiente local.
 
 ### Aplicar Migrations
 ```bash
-# Via CLI
+# No Package Manager Console do Visual Studio
+Update-Database
+
+# Ou via CLI
 dotnet ef database update
-```
-
-## 📚 Arquitetura Detalhada
-
-Para entender melhor a arquitetura monolítica, veja: [MONOLITO_ARQUITETURA.md](./MONOLITO_ARQUITETURA.md)
-
-## 🔒 Segurança
-
-- ✅ Senhas validadas e armazenadas
-- ✅ JWT Bearer Token com expiração
-- ✅ Roles de autorização (Admin/User)
-- ✅ Middlewares globais de segurança
-- ✅ SQL Server Certificate Trusted
-
-## ⚙️ Configuração
-
-### appsettings.json
-```json
-{
-  "ConnectionStrings": {
-    "ConnectionString": "Server=<seu_servidor>;Database=fiapStore;Trusted_Connection=True;TrustServerCertificate=True;"
-  },
-  "Jwt": {
-    "Key": "<sua_chave_secreta>",
-    "Issuer": "GameStore"
-  }
-}
 ```
 
 ## 📂 Estrutura de Arquivos
@@ -197,28 +163,6 @@ GameStore/
 ├── appsettings.json        # Variáveis de ambiente
 └── GameStore.http          # Exemplos de requisições
 ```
-
-## 🧪 Testes Unitários
-
-O projeto possui testes unitários implementados com **xUnit** no projeto `GameStore.Tests`.
-
-### Executar os testes
-```bash
-dotnet test
-```
-
-### Cobertura atual
-| Classe | Métodos Testados |
-|--------|------------------|
-| `Customer` | `ValidarEmail`, `ValidarSenha`, `ValidarTodos`, Construtores |
-
-## 🚦 Próximos Passos
-
-1. **Implementar Services** - Adicionar camada de lógica de negócio
-2. **Adicionar Validações** - FluentValidation
-3. **Implementar Caching** - Redis
-4. **CI/CD** - GitHub Actions
-5. **Containerização** - Docker
 
 ## 👤 Autor
 

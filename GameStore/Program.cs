@@ -2,9 +2,17 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using GameStore.Middlewares;
+using GameStore.Data;
+using GameStore.Repositories;
+using GameStore.Data.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -24,15 +32,6 @@ builder.Services.AddSwaggerGen(options =>
             Name = "OpenAPI License"
         }
     });
-    
-    // Exemplo de resposta para métodos GET
-    //options.ExampleFilters();
-    
-    // Inclui comentários XML se existirem
-    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = System.IO.Path.Combine(AppContext.BaseDirectory, xmlFile);
-    if (System.IO.File.Exists(xmlPath))
-        options.IncludeXmlComments(xmlPath);
 });
 
 builder.Services.AddSwaggerGen(c =>
@@ -60,6 +59,11 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(configuration.GetConnectionString("ConnectionString"));
+}, ServiceLifetime.Scoped);
 
 // Adiciona autenticação JWT
 builder.Services.AddAuthentication(options =>
@@ -89,6 +93,9 @@ builder.Services.AddAuthorization(options =>
 });
 
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IJogoRepository, JogoRepository>();
 
 var app = builder.Build();
 

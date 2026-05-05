@@ -1,0 +1,45 @@
+# Build e compilação
+bin/
+obj/
+out/
+dist/
+
+# Visual Studio / Rider
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.DotSettings.user
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Logs e temporários
+*.log
+*.tmp
+*.temp
+*.cache
+
+# Cobertura de testes
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Variáveis de ambiente e segredos
+.env
+.env.*
+appsettings.Development.json
+appsettings.Local.json
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini

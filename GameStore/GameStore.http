@@ -1,7 +1,7 @@
 ### Variáveis
 @baseUrl = http://localhost:5277
 @userId = 12345678-1234-1234-1234-123456789012
-@adminToken = 
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwianRpIjoiNmM4ZDc0NWMtY2U5MC00YWQ0LWE2OGEtZWRlZmJlNTc2N2M0IiwiZXhwIjoxNzc3OTM3ODc1LCJpc3MiOiJHYW1lU3RvcmUiLCJhdWQiOiJHYW1lU3RvcmVBUEkifQ.ccJ-ssBntUNsNBy82Zbe6T4n6zgyE7pZl2o9uTUC-Ao
 @userToken =
 
 ### 1. LOGIN - Obter token Admin 
@@ -34,7 +34,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwia
 
 ### 5. Cadastrar novo usuário
 POST {{baseUrl}}/api/users
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6ImFkbWluIiwianRpIjoiY2RmYzUxNjItNzg1MS00ZTBiLTkzYTEtZmFjNzY0MmRlYjgyIiwiZXhwIjoxNzc3OTQzMDc1LCJpc3MiOiJHYW1lU3RvcmUiLCJhdWQiOiJHYW1lU3RvcmVBUEkifQ.yzacCHldFDe9_MsqqhrVGndRCTTVq5IL9_vryxpkg7Q
 Content-Type: application/json
 
 {

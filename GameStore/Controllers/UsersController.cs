@@ -47,7 +47,7 @@ public class UsersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [Authorize ("admin")]
-    public ActionResult<Customer> ConsultarUsuario([FromBody] Guid id)
+    public ActionResult<Customer> ConsultarUsuario([FromRoute] Guid id)
     {
         var user = _usuarioRepository.ObterPorId(id);
     
@@ -76,13 +76,13 @@ public class UsersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [Authorize ("admin")]
-    public ActionResult<Customer> AtualizarUsuario([FromBody] Customer usuarioAtualizado)
+    public ActionResult<Customer> AtualizarUsuario([FromRoute] Guid id, [FromBody] Customer usuarioAtualizado)
     {
-        var user = _usuarioRepository.ObterPorId(usuarioAtualizado.Id);
+        var user = _usuarioRepository.ObterPorId(id);
 
         if (user == null)
         {
-            return NotFound(new { mensagem = $"Usuário com ID {usuarioAtualizado.Id} não encontrado" });
+            return NotFound(new { mensagem = $"Usuário com ID {id} não encontrado" });
         }
 
         if (usuarioAtualizado == null || !usuarioAtualizado.ValidarTodos())
@@ -101,6 +101,8 @@ public class UsersController : ControllerBase
         user.Nome = usuarioAtualizado.Nome;
         user.Senha = usuarioAtualizado.Senha;
 
+        _usuarioRepository.Alterar(user);
+
         return Ok(new { mensagem = "Usuário atualizado com sucesso", user });
     }
     
@@ -110,7 +112,7 @@ public class UsersController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [Authorize ("admin")]
-    public ActionResult DeletarUsuario([FromBody] Guid id)
+    public ActionResult DeletarUsuario([FromRoute] Guid id)
     {
         var user = _usuarioRepository.ObterPorId(id);
     
@@ -120,7 +122,7 @@ public class UsersController : ControllerBase
         }
     
         _usuarioRepository.Deletar(id);
-        return Ok(new { mensagem = "Jogo deletado com sucesso" });
+        return Ok(new { mensagem = "Usuário deletado com sucesso" });
     }
     
     
